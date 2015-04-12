@@ -1,5 +1,5 @@
 *.sw?
-settings.json
+setting.json
 .gradle
 /local.properties
 /.idea/workspace.xml
