@@ -10,13 +10,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Setting {
+    private static Setting instance;
+
     private String apiKey;
+
+    private Setting() {
+    }
+
+    public static Setting getInstance() {
+        if (instance == null) {
+            instance = null;
+        }
+        return instance;
+    }
 
     public String getApiKey() {
         return apiKey;
     }
 
-    public Setting(AssetManager manager) {
+    public void load(AssetManager manager) {
         try {
             JSONObject json = new JSONObject(loadContent(manager));
             apiKey = json.getString("api_key");
