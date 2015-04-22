@@ -20,7 +20,7 @@ public class TopFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, new PassOverFragment())
+                        .replace(R.id.container, new PasscodeFragment())
                         .commit();
             }
         });
