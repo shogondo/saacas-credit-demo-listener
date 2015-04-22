@@ -3,4 +3,7 @@
     <string name="use_coupon">クーポンを使う</string>
     <string name="use_credit_card">クレジットカードで支払う</string>
     <string name="use_point">ポイントを使う</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
