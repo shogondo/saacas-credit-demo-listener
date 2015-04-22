@@ -8,13 +8,6 @@ import android.view.ViewGroup;
 
 
 public class PassOverFragment extends Fragment {
-    public static PassOverFragment newInstance() {
-        PassOverFragment fragment = new PassOverFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     public PassOverFragment() {
     }
 
