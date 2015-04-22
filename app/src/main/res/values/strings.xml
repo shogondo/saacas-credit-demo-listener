@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">SA@CASデモ</string>
+    <string name="cancel">キャンセル</string>
+    <string name="confirm_payment">お請求額は%d円です。決済処理を行ってよろしいですか？</string>
     <string name="next">次へ</string>
+    <string name="ok">OK</string>
     <string name="pass_over">この画面を表示したまま、決済端末にスマホをかざしてください。</string>
     <string name="please_enter_passcode">パスワードを入力してください。</string>
     <string name="use_coupon">クーポンを使う</string>
