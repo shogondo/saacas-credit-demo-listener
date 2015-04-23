@@ -5,11 +5,9 @@
     <string name="next">次へ</string>
     <string name="ok">OK</string>
     <string name="pass_over">この画面を表示したまま、決済端末にスマホをかざしてください。</string>
+    <string name="payment_completed">お支払が完了しました</string>
     <string name="please_enter_passcode">パスワードを入力してください。</string>
     <string name="use_coupon">クーポンを使う</string>
     <string name="use_credit_card">クレジットカードで支払う</string>
     <string name="use_point">ポイントを使う</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

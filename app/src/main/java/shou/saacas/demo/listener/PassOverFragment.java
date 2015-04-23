@@ -49,6 +49,9 @@ public class PassOverFragment extends Fragment implements ConfirmDialogFragment.
                     return new Packet("0001", "", "0000");
                 } else if (REQUEST_CODE_QUERY.equals(packet.getRequestCode())) {
                     if (confirmed) {
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.container, new CompletedFragment())
+                                .commit();
                         return new Packet("0003", "", "0000");
                     }
                     else {
