@@ -6,17 +6,20 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import jp.atrealize.saacas.ssc.Packet;
 import jp.atrealize.saacas.ssc.SSCReceivedStatus;
 import jp.atrealize.saacas.ssc.SaacasSSCListener;
 
-public class PassOverFragment extends Fragment implements ConfirmDialogFragment.Callback {
+public class PassOverFragment extends Fragment {
     private static final String REQUEST_CODE_PASS_AMOUNT = "0001";
 
     private static final String REQUEST_CODE_QUERY = "0002";
 
     private static final String REQUEST_CODE_COMPLETED = "0004";
+
+    private TextView text;
 
     private int amount;
 
@@ -25,9 +28,15 @@ public class PassOverFragment extends Fragment implements ConfirmDialogFragment.
     public PassOverFragment() {
     }
 
+    public void setConfirmed(boolean value) {
+        confirmed = value;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.pass_over, container, false);
+        View view = inflater.inflate(R.layout.pass_over, container, false);
+        text = (TextView)view.findViewById(R.id.text);
+        return view;
     }
 
     @Override
@@ -43,24 +52,26 @@ public class PassOverFragment extends Fragment implements ConfirmDialogFragment.
                     amount = Integer.parseInt(tokens[0]);
 
                     FragmentManager manager = getFragmentManager();
-                    ConfirmDialogFragment dialog = new ConfirmDialogFragment();
+                    ConfirmDialogFragment dialog = ConfirmDialogFragment.newInstance(amount);
                     dialog.show(manager, "dialog");
 
-                    return new Packet("0001", "", "0000");
+                    return createPacket("0001");
                 } else if (REQUEST_CODE_QUERY.equals(packet.getRequestCode())) {
                     if (confirmed) {
-                        getFragmentManager().beginTransaction()
-                                .replace(R.id.container, new CompletedFragment())
-                                .commit();
-                        return new Packet("0003", "", "0000");
-                    }
-                    else {
-                        return new Packet("0002", "", "0000");
+                        return createPacket("0003");
+                    } else {
+                        return createPacket("0002");
                     }
                 } else if (REQUEST_CODE_COMPLETED.equals(packet.getRequestCode())) {
-                    return new Packet("0004", "", "0000");
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            text.setText(getString(R.string.payment_completed));
+                        }
+                    });
+                    return createPacket("0004");
                 } else {
-                    return new Packet("9999", "", "9999");
+                    return createPacket("9999", "9999");
                 }
             }
         });
@@ -72,8 +83,11 @@ public class PassOverFragment extends Fragment implements ConfirmDialogFragment.
         SaacasSSCListener.getInstance().close();
     }
 
-    @Override
-    public void onConfirmed() {
-        confirmed = true;
+    private Packet createPacket(String requestCode) {
+        return new Packet(requestCode, "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "0000");
+    }
+
+    private Packet createPacket(String requestCode, String responseCode) {
+        return new Packet(requestCode, "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", responseCode);
     }
 }

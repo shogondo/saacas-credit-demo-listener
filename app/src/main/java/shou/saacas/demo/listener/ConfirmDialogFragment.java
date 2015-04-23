@@ -40,7 +40,7 @@ public class ConfirmDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity())
-                .setMessage(getString(R.string.confirm_payment))
+                .setMessage(getString(R.string.confirm_payment, amount))
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         callback.onConfirmed();

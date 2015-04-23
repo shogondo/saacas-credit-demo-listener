@@ -23,7 +23,7 @@ public class PasscodeFragment extends Fragment {
             public void onClick(View v) {
                 hideKeyboard();
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, new PassOverFragment())
+                        .replace(R.id.container, new PassOverFragment(), "pass_over")
                         .commit();
             }
         });
